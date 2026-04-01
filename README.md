@@ -1,15 +1,61 @@
 # R Development Container
 
-This is a development container template for basic R development projects for use with GitHub Codespaces.
+A development container template for R projects, demonstrating how to use
+[DevPod](https://devpod.sh) with [Positron IDE](https://positron.posit.co).
 
-## Contents
+## Prerequisites
 
-This template comes with some placeholder files and folders to get projects up and started quickly.
+- [DevPod Desktop](https://devpod.sh/docs/getting-started/install) (includes the CLI)
+- [Docker](https://docs.docker.com/get-docker/) (running locally as the compute provider)
+- [Positron IDE](https://positron.posit.co/download.html)
 
-- `R/` is for the main R source code.
-- `data/` is for raw data and inputs.
-- `output/` is for data products.
-- `quarto/` is for quarto projects.
+## Getting Started with DevPod CLI
 
-`renv` and all its related folders are initailized on container creation. An R-focused `.gitignore`
-is provided and everything is licensed under the MIT License.
+### 1. Add the Docker provider
+
+```bash
+devpod provider add docker
+```
+
+Only needed once. DevPod uses Docker to run the dev container locally.
+
+### 2. Start a workspace from this repo
+
+```bash
+devpod up github.com/<your-username>/devpod-example --ide positron
+```
+
+DevPod will clone the repo, build the container, run the `postCreateCommand`
+(initializes renv and installs the R language server), and open the workspace in
+Positron. Your R session runs inside the container with all packages managed via
+`renv`.
+
+## Common Workspace Commands
+
+```bash
+# List all workspaces
+devpod list
+
+# Stop a running workspace
+devpod stop devpod-example
+
+# Restart a stopped workspace
+devpod up devpod-example
+
+# SSH into a workspace directly
+devpod ssh devpod-example
+
+# Delete a workspace
+devpod delete devpod-example
+```
+
+## Project Layout
+
+- `R/` — R source scripts
+- `data/` — raw data and inputs
+- `output/` — data products
+- `quarto/` — Quarto documents and reports
+
+`renv` is initialized on container creation and packages are restored on every
+container start via `postStartCommand`. The `renv.lock` file pins all package
+versions for reproducibility.
