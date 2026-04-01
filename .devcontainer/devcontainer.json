@@ -9,9 +9,11 @@
     "vscode": {
       "extensions": [
         "posit.air-vscode",
-        "quarto.quarto"
+        "quarto.quarto",
+        "vscodevim.vim"
       ],
       "settings": {
+        "vim.enable": true,
         "[r]": {
           "editor.formatOnSave": true,
           "editor.defaultFormatter": "Posit.air-vscode"
