@@ -44,6 +44,16 @@ renv/       # renv auto-generated environment files
 renv.lock   # Frozen package versions — commit this file
 ```
 
+## Git Conventions
+
+Use [Conventional Commits](https://www.conventionalcommits.org/) for all commit messages:
+
+```
+<type>[optional scope]: <description>
+```
+
+Common types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+
 ## Architecture Notes
 
 - `.Rprofile` activates the `renv` environment on R startup — do not remove the `source("renv/activate.R")` line.
