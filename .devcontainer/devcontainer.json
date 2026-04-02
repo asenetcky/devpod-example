@@ -3,7 +3,8 @@
   "image": "ghcr.io/rocker-org/devcontainer/r-ver:4.5",
   "features": {
     "ghcr.io/rocker-org/devcontainer-features/renv-cache:0.1.2": {},
-    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {}
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   "customizations": {
     "vscode": {
@@ -16,7 +17,9 @@
       ],
       "settings": {
         "vim.enable": true,
-        "editor.rulers": [78]
+        "editor.rulers": [
+          78
+        ]
       }
     },
     "codespaces": {
@@ -26,8 +29,15 @@
       ]
     }
   },
+  "initializeCommand": {
+    "preflight-git-installed": "git --version > /dev/null 2>&1 && echo '✅ git found on host' || echo '⚠️  git not found on host'",
+    "preflight-git-identity": "git config user.name > /dev/null 2>&1 && git config user.email > /dev/null 2>&1 && echo '✅ git identity configured' || echo '⚠️  git identity not set — run: git config --global user.name \"Name\" && git config --global user.email \"you@example.com\"'",
+    "preflight-no-secrets": "! git ls-files | grep -qiE '(\\.env$|\\.env\\.|secrets|credentials)' && echo '✅ no secret files tracked' || echo '⚠️  possible secret files detected in git — review before pushing'"
+  },
   "postCreateCommand": {
-    "setup": "R -q -e \"if (!file.exists('renv.lock')) {renv::init()} else {print('renv already initialized.')}\" && R -q -e \"renv::install('languageserver', repos='https://p3m.dev/cran/__linux__/noble/latest', lock=TRUE, prompt=FALSE, dependencies=TRUE)\""
+    "setup": "R -q -e \"if (!file.exists('renv.lock')) {renv::init()} else {print('renv already initialized.')}\"",
+    "postflight-r-version": "R --version | head -1 && echo '✅ R is available'",
+    "postflight-renv-status": "R -q -e \"cat('renv version:', as.character(packageVersion('renv')), '\\n')\""
   },
   "postStartCommand": {
     "renv-restore": [
@@ -36,5 +46,9 @@
       "-e",
       "renv::restore()"
     ]
-  }
+  },
+  "postAttachCommand": {
+    "welcome": "printf '\\n┌─────────────────────────────────────────┐\\n│   welcome to the R dev container  🧪    │\\n│   hack well, commit often, stay tidy   │\\n└─────────────────────────────────────────┘\\n\\n' && echo '--- recent commits ---' && git log --oneline -10 && echo ''"
+  },
+  "shutdownAction": "stopContainer"
 }

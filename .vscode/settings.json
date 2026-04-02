@@ -6,6 +6,5 @@
   },
   "remote.extensionKind": {
     "reditorsupport.r": ["ui"]
-  },
-  "window.restoreWindows": "none"
+  }
 }
