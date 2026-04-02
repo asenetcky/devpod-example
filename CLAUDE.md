@@ -54,6 +54,12 @@ Use [Conventional Commits](https://www.conventionalcommits.org/) for all commit 
 
 Common types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 
+## IDE Notes (Positron)
+
+- **Ctrl+Enter behavior**: Code should execute in the R Console (Positron's Ark-powered built-in REPL), not a terminal labeled "R Interactive". If Ctrl+Enter opens a new "R Interactive" terminal running `radian` instead, it means the Ark console session hasn't started yet — Positron falls back to a radian terminal when no console is active.
+  - `.vscode/settings.json` sets `interpreters.startupBehavior: "always"` to auto-start the console, and forces `REditorSupport.r` to run on the UI side so it can't create radian terminals in the container.
+  - If the issue persists after rebuilding the container, manually start the R console from the Console panel before using Ctrl+Enter.
+
 ## Architecture Notes
 
 - `.Rprofile` activates the `renv` environment on R startup — do not remove the `source("renv/activate.R")` line.

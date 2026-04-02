@@ -16,11 +16,7 @@
       ],
       "settings": {
         "vim.enable": true,
-        "editor.rulers": [78],
-        "[r]": {
-          "editor.formatOnSave": true,
-          "editor.defaultFormatter": "Posit.air-vscode"
-        }
+        "editor.rulers": [78]
       }
     },
     "codespaces": {

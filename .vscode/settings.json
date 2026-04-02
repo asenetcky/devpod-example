@@ -1,0 +1,11 @@
+{
+  "[r]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "Posit.air-vscode",
+    "interpreters.startupBehavior": "always"
+  },
+  "remote.extensionKind": {
+    "reditorsupport.r": ["ui"]
+  },
+  "window.restoreWindows": "none"
+}
